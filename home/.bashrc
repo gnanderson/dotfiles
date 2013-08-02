@@ -45,7 +45,7 @@ alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
 # Tidy PWD 
 bash_prompt_command() {
     local pwdmaxlen=25
-    local trunc_symbol=".."
+    local trunc_symbol="⋯"
     local dir=${PWD##*/}
     pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
     NEW_PWD=${PWD/#$HOME/\~}
@@ -102,12 +102,19 @@ patches: <patches|join( → )>>" 2>/dev/null
 # 6 - Cyan
 # 7 - White 
 
-COL1=$(tput bold)$(tput setaf 2) # Green (bold)
-COL2=$(tput bold)$(tput setaf 5) # Magenta (bold)
-COL3=$(tput dim)$(tput setaf 7) # White (bold)
-COL4=$(tput setaf 7)             # White (normal)
+#COL1=$(tput bold)$(tput setaf 2) # Green (bold)
+COL1='\e[1;32m'
+#COL2=$(tput bold)$(tput setaf 5) # Magenta (bold)
+COL2='\e[1;35m'
+#COL3=$(tput dim)$(tput setaf 7) # White (bold)
+COL3='\e[1;37m'
+#COL4=$(tput setaf 7)             # White (normal)
+COL4='\e[0;37m'
 
 PROMPT_COMMAND=bash_prompt_command
+git_status="\[$COL1\]"'$(git_status)'
+user_time="\[$COL2\]\u\[$COL3\]@\h [\t] "
+current_dir="\[$COL1\]"'$NEW_PWD '
+dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'$(hg_status)"\n: \[$COL4\]"
 
-PS1='\[$COL1\]$(git_status)\[$COL2\]\u\[$COL3\]@\h [\t] \[$COL1\]$NEW_PWD \[$COL2\]$(__git_ps1 "(%s)")$(hg_status)\n: \[\e[0;37m\]'
-
+PS1=$git_status$user_time$current_dir$dvcs_status
