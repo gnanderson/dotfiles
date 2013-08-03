@@ -44,7 +44,7 @@ alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
 
 # Tidy PWD 
 bash_prompt_command() {
-    local pwdmaxlen=25
+    local pwdmaxlen=40
     local trunc_symbol="⋯"
     local dir=${PWD##*/}
     pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
@@ -113,7 +113,7 @@ COL4='\e[0;37m'
 
 PROMPT_COMMAND=bash_prompt_command
 git_status="\[$COL1\]"'$(git_status)'
-user_time="\[$COL2\]\u\[$COL3\]@\h [\t] "
+user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
 current_dir="\[$COL1\]"'$NEW_PWD '
 dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'$(hg_status)"\n: \[$COL4\]"
 
