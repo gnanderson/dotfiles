@@ -82,3 +82,7 @@ highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 " disable annoying backup/swap files
 set nobackup
 set noswapfile
+
+" open splits in the *correct* place
+set splitbelow
+set splitright
