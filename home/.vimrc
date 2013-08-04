@@ -79,3 +79,6 @@ highlight   Pmenu         ctermfg=green ctermbg=235
 highlight   PmenuSel      ctermfg=white ctermbg=darkgray
 highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 
+" disable annoying backup/swap files
+set nobackup
+set noswapfile
