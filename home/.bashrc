@@ -34,8 +34,8 @@ export LFS=/mnt/lfs
 #[[ $TERM != "screen" ]] && tmux attach && exit
 
 # Aliases
-alias oscb='osc build openSUSE_12.3'
-alias oscba='osc build --no-verify openSUSE_12.3'
+alias oscb='osc build openSUSE_13.1'
+alias oscba='osc build --no-verify openSUSE_13.1'
 alias osca='osc -A https://obs.dev.andtech.eu:444'
 alias scp='scp -p'
 alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
