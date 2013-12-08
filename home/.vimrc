@@ -58,7 +58,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'gnanderson/EasyColour'
 Bundle 'dgryski/vim-godef'
 Bundle 'ervandew/supertab'
-Bundle 'jnwhiteh/vim-golang'
+Bundle 'gnanderson/vim-golang'
 
 " Load colour scheme after EasyColor
 set background=dark
