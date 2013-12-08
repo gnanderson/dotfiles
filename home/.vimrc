@@ -39,10 +39,6 @@ set colorcolumn=80
 set wildmenu
 set wildmode=longest:full,full
 
-" Golang
-filetype plugin indent on     " required!
-syntax on
-
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -56,9 +52,11 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'gnanderson/EasyColour'
-Bundle 'dgryski/vim-godef'
-Bundle 'ervandew/supertab'
-Bundle 'gnanderson/vim-golang'
+"Bundle 'dgryski/vim-godef'
+"Bundle 'ervandew/supertab'
+
+filetype plugin indent on
+syntax on
 
 " Load colour scheme after EasyColor
 set background=dark
@@ -75,7 +73,7 @@ nmap <silent> ,sv :so $MYVIMRC<CR>
 set cpoptions+=$
 
 " Autocomplete
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 highlight   Pmenu         ctermfg=green ctermbg=235
 highlight   PmenuSel      ctermfg=white ctermbg=darkgray
 highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
