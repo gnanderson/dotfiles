@@ -52,6 +52,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'gnanderson/EasyColour'
+Bundle 'Valloric/YouCompleteMe'
 "Bundle 'dgryski/vim-godef'
 "Bundle 'ervandew/supertab'
 
@@ -85,3 +86,5 @@ set noswapfile
 " open splits in the *correct* place
 set splitbelow
 set splitright
+
+autocmd FileType c,cpp,java,php,go,javascript,yaml autocmd BufWritePre <buffer> :%s/\s\+$//e
