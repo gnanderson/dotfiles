@@ -40,8 +40,8 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Vundle
-set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
