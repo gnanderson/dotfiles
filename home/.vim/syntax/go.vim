@@ -32,17 +32,33 @@ endif
 if !exists("go_highlight_array_whitespace_error")
   let go_highlight_array_whitespace_error = 1
 endif
+
 if !exists("go_highlight_chan_whitespace_error")
   let go_highlight_chan_whitespace_error = 1
 endif
+
 if !exists("go_highlight_extra_types")
   let go_highlight_extra_types = 1
 endif
+
 if !exists("go_highlight_space_tab_error")
   let go_highlight_space_tab_error = 1
 endif
+
 if !exists("go_highlight_trailing_whitespace_error")
   let go_highlight_trailing_whitespace_error = 1
+endif
+
+if !exists("go_highlight_functions")
+    let go_highlight_functions = 1
+endif
+
+if !exists("go_highlight_methods")
+    let go_highlight_methods = 1
+endif
+
+if !exists("go_highlight_structs")
+    let go_highlight_structs = 1
 endif
 
 syn case match
@@ -135,9 +151,6 @@ hi def link     goCharacter         Character
 syn region      goBlock             start="{" end="}" transparent fold
 syn region      goParen             start='(' end=')' transparent
 
-syn match       goBraces            '[{}()\[\]]'
-
-hi def link     goBraces			Operator
 
 " Integers
 syn match       goDecimalInt        "\<\d\+\([Ee]\d\+\)\?\>"
@@ -181,10 +194,14 @@ syn match		goOperator "&"
 
 hi def link		goOperator			Operator
 
-" Spaces after "[]"
-if go_highlight_array_whitespace_error != 0
-  syn match goSpaceError display "\(\[\]\)\@<=\s\+"
-endif
+" included from: https://github.com/athom/more-colorful.vim/blob/master/after/syntax/go.vim
+"
+" Comments; their contents
+syn keyword     goTodo              contained NOTE
+hi def link     goTodo              Todo
+
+syn match       goBrackets            '[{}()\[\]]'
+hi def link     goBrackets          Operator
 
 " Spacing errors around the 'chan' keyword
 if go_highlight_chan_whitespace_error != 0
@@ -213,6 +230,28 @@ endif
 if go_highlight_trailing_whitespace_error != 0
   syn match goSpaceError display excludenl "\s\+$"
 endif
+
+" Functions;
+if go_highlight_functions != 0
+    syn match goFunction                            /\(func\s\+\)\@<=\w\+\((\)\@=/
+    syn match goFunction                            /\()\s\+\)\@<=\w\+\((\)\@=/
+endif
+hi def link     goFunction                  Function
+
+" Methods;
+if go_highlight_methods != 0
+    syn match goMethod                              /\(\.\)\@<=\w\+\((\)\@=/
+endif
+hi def link     goMethod                        Function
+
+" Structs;
+if go_highlight_structs != 0
+    syn match goStruct                              /\(.\)\@<=\w\+\({\)\@=/
+    syn match goStructDef                           /\(type\s\+\)\@<=\w\+\(\s\+struct\s\+{\)\@=/
+endif
+
+hi def link     goStruct                        Function
+hi def link     goStructDef         Function
 
 hi def link     goExtraType         Type
 hi def link     goSpaceError        Error

@@ -52,8 +52,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'gnanderson/EasyColour'
+Plugin 'fatih/vim-go'
 Bundle 'Valloric/YouCompleteMe'
-"Bundle 'dgryski/vim-godef'
 "Bundle 'ervandew/supertab'
 
 filetype plugin indent on
@@ -62,7 +62,8 @@ syntax on
 " Load colour scheme after EasyColor
 set background=dark
 colorscheme graham
-highlight ColorColumn ctermbg=235 "set this after any colour plugins if you use them (e.g. EasyColour)
+"set this after any colour plugins if you use them (e.g. EasyColour)
+highlight ColorColumn ctermbg=235 
 " Show all vim servers
 " Show all available VIM servers
 nmap <silent> ,ss :echo serverlist()<CR>

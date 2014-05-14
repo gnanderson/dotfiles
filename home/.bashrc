@@ -33,12 +33,14 @@ export LFS=/mnt/lfs
 # Tmux
 #[[ $TERM != "screen" ]] && tmux attach && exit
 
+# Homeshick
+source $HOME/.homesick/repos/homeshick/homeshick.sh
+
 # Aliases
 alias oscb='osc build openSUSE_13.1'
 alias oscba='osc build --no-verify openSUSE_13.1'
 alias osca='osc -A https://obs.dev.andtech.eu:444'
 alias scp='scp -p'
-alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias bios='[ -f /usr/sbin/dmidecode ] && sudo -v && echo -n "Motherboard" && sudo /usr/sbin/dmidecode -t 1 | grep "Manufacturer\|Product Name\|Serial Number" | tr -d "\t" | sed "s/Manufacturer//" && echo -ne "\nBIOS" && sudo /usr/sbin/dmidecode -t 0 | grep "Vendor\|Version\|Release" | tr -d "\t" | sed "s/Vendor//"'
 alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
 
