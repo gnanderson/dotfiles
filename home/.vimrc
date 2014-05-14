@@ -40,21 +40,21 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'gnanderson/EasyColour'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'gnanderson/EasyColour'
 Plugin 'fatih/vim-go'
-Bundle 'Valloric/YouCompleteMe'
-"Bundle 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'ervandew/supertab'
 
 filetype plugin indent on
 syntax on
