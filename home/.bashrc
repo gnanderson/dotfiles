@@ -106,6 +106,8 @@ COL3='\e[1;37m'
 #COL4=$(tput setaf 7)             # White (normal)
 COL4='\e[0;37m'
 
+source ~/.bash_git
+
 PROMPT_COMMAND=bash_prompt_command
 git_status="\[$COL1\]"'$(git_status)'
 user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
