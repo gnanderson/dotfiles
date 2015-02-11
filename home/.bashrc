@@ -11,10 +11,10 @@ export EDITOR=/usr/bin/vim
 #export EC2_PRIVATE_KEY=""
 
 # Extra PATH's
-export PATH=$PATH:/home/ganderson/src/python/git-hg/bin
+#export PATH=$PATH:/home/ganderson/src/python/git-hg/bin
 
 # Dotfiles
-export DOTFILES_DIR=~/.dotfiles
+#export DOTFILES_DIR=~/.dotfiles
 
 # Chromium
 export XDG_CACHE_HOME=/tmp
@@ -85,13 +85,6 @@ git_status() {
     echo '• '
 }
 
-hg_status() {
-    hg prompt --angle-brackets "\
-< on <branch>>\
-< at <tags|, >>\
-<status|modified|unknown><update><
-patches: <patches|join( → )>>" 2>/dev/null
-}
 
 # Colours
 # 
@@ -117,6 +110,6 @@ PROMPT_COMMAND=bash_prompt_command
 git_status="\[$COL1\]"'$(git_status)'
 user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
 current_dir="\[$COL1\]"'$NEW_PWD '
-dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'$(hg_status)"\n: \[$COL4\]"
+dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
