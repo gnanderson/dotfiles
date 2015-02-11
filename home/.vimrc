@@ -74,8 +74,6 @@ nmap <silent> ,sv :so $MYVIMRC<CR>
 " show a dollar at the end of change field
 set cpoptions+=$
 
-let g:go_gocode_bin="/usr/bin/gocode"
-
 " Autocomplete
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 highlight   Pmenu         ctermfg=green ctermbg=235
