@@ -20,7 +20,11 @@ export EDITOR=/usr/bin/vim
 export XDG_CACHE_HOME=/tmp
 
 # Go
-export PATH=$PATH:$GOBIN
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=~
+
+# Drush
+export PATH=$PATH:~/.composer/vendor/bin
 
 test -s ~/.alias && . ~/.alias || true
 
@@ -34,20 +38,27 @@ export LFS=/mnt/lfs
 #[[ $TERM != "screen" ]] && tmux attach && exit
 
 # Homeshick
-source $HOME/.homesick/repos/homeshick/homeshick.sh
+#source $HOME/.homesick/repos/homeshick/homeshick.sh
 
 # Aliases
+#alias vim='~/bin/vim'
+alias tmux='tmux -2'
 alias oscb='osc build openSUSE_13.1'
 alias oscba='osc build --no-verify openSUSE_13.1'
 alias osca='osc -A https://obs.dev.andtech.eu:444'
 alias scp='scp -p'
+alias la='ls -la'
 alias bios='[ -f /usr/sbin/dmidecode ] && sudo -v && echo -n "Motherboard" && sudo /usr/sbin/dmidecode -t 1 | grep "Manufacturer\|Product Name\|Serial Number" | tr -d "\t" | sed "s/Manufacturer//" && echo -ne "\nBIOS" && sudo /usr/sbin/dmidecode -t 0 | grep "Vendor\|Version\|Release" | tr -d "\t" | sed "s/Vendor//"'
 alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
+alias symflog="cd ~/sites/graham-dev.thenational.scot/app/logs && ~/bin/symfonylgo dev.log"
+alias ssh-stage2="ssh -t -A heraldweb4 ssh -t -A stage2"
+alias ssh-stage1="ssh -t -A heraldweb4 ssh -t -A stage1"
+
 
 # Tidy PWD 
 bash_prompt_command() {
     local pwdmaxlen=40
-    local trunc_symbol="⋯"
+    local trunc_symbol="…"
     local dir=${PWD##*/}
     pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
     NEW_PWD=${PWD/#$HOME/\~}
@@ -68,7 +79,7 @@ git_status() {
     untracked_files=`git ls-files --others --exclude-standard 2> /dev/null`
     status=''
 
-    if [ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ] ; then # We have staged files
+	if [ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ] ; then # We have staged files
        status="▲"
     fi
 
@@ -85,6 +96,13 @@ git_status() {
     echo '• '
 }
 
+hg_status() {
+    hg prompt --angle-brackets "\
+< on <branch>>\
+< at <tags|, >>\
+<status|modified|unknown><update><
+patches: <patches|join( → )>>" 2>/dev/null
+}
 
 # Colours
 # 
@@ -106,12 +124,11 @@ COL3='\e[1;37m'
 #COL4=$(tput setaf 7)             # White (normal)
 COL4='\e[0;37m'
 
-source ~/.bash_git
-
 PROMPT_COMMAND=bash_prompt_command
 git_status="\[$COL1\]"'$(git_status)'
 user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
 current_dir="\[$COL1\]"'$NEW_PWD '
+source ~/.bash_git
 dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
