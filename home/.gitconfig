@@ -8,3 +8,5 @@
 
 [credential "https://go.herald.scot"]
 	username = graham
+[credential "https://github.com"]
+	username = gnanderson
