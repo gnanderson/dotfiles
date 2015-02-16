@@ -1,6 +1,7 @@
 # command mode
 set -o vi
 
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 export EDITOR=/usr/bin/vim
 #export ZEND_TOOL_INCLUDE_PATH="/data/php5/ZendFramework/library"
 
@@ -132,3 +133,4 @@ source ~/.bash_git
 dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
+

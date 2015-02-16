@@ -1,0 +1,7 @@
+[user]
+	name = Graham Anderson
+	email = graham.anderson@heraldandtimes.co.uk
+[color]
+	ui = auto
+[push]
+	default = simple
