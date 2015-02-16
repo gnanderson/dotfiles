@@ -5,3 +5,6 @@
 	ui = auto
 [push]
 	default = simple
+
+[credential "https://go.herald.scot"]
+	username = graham
