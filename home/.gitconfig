@@ -5,7 +5,8 @@
 	ui = auto
 [push]
 	default = simple
-
+[credential]
+	helper = cache --timeout=3600
 [credential "https://go.herald.scot"]
 	username = graham
 [credential "https://github.com"]

@@ -134,3 +134,5 @@ dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
 
+
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
