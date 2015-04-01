@@ -16,6 +16,7 @@ Plugin 'spf13/piv'
 "Plugin 'ervandew/supertab'
 
 call vundle#end()
+
 filetype plugin indent on
 
 set relativenumber
@@ -25,14 +26,14 @@ set cursorline
 set nobackup
 set noswapfile
 
-set cmdheight=2
+set cmdheight=1
 set ts=4
 set sw=4
 set t_Co=256
 
 set autoread
 set encoding=utf-8 
-set undolevels=200
+set undolevels=500
 
 set laststatus=2 " always show the statusline
 set statusline=   " clear the statusline for when vimrc is reloaded
@@ -50,8 +51,10 @@ set statusline+=%b,0x%-8B\                   " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 " Smart tabbing / autoindenting
-"set autoindent
-"set smarttab
+" set smarttab
+
+" Backspace on windows
+set backspace=indent,eol,start
 
 " Search options
 "set incsearch ignorecase smartcase hlsearch
@@ -71,10 +74,14 @@ highlight ColorColumn ctermbg=235
 nmap <silent> ,ev :e $MYVIMRC<CR>
 nmap <silent> ,sv :so $MYVIMRC<CR>
 
+" braces
+inoremap {<CR>  {<CR>}<Esc>O
+
 " show a dollar at the end of change field
 set cpoptions+=$
 
-let g:go_gocode_bin="/usr/bin/gocode"
+" vim-go
+let g:go_fmt_command = "goimports"
 
 " Autocomplete
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
