@@ -1,6 +1,7 @@
 # command mode
 set -o vi
 
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 #export ZEND_TOOL_INCLUDE_PATH="/data/php5/ZendFramework/library"
 
 ## Amazon AWS CLi tool
@@ -31,10 +32,9 @@ export LFS=/mnt/lfs
 #[[ $TERM != "screen" ]] && tmux attach && exit
 
 # Homeshick
-source $HOME/.homesick/repos/homeshick/homeshick.sh
+#source $HOME/.homesick/repos/homeshick/homeshick.sh
 
 # Aliases
-alias vim='~/bin/vim'
 alias tmux='tmux -2'
 alias oscb='osc build openSUSE_13.1'
 alias oscba='osc build --no-verify openSUSE_13.1'
@@ -43,6 +43,10 @@ alias scp='scp -p'
 alias la='ls -la'
 alias bios='[ -f /usr/sbin/dmidecode ] && sudo -v && echo -n "Motherboard" && sudo /usr/sbin/dmidecode -t 1 | grep "Manufacturer\|Product Name\|Serial Number" | tr -d "\t" | sed "s/Manufacturer//" && echo -ne "\nBIOS" && sudo /usr/sbin/dmidecode -t 0 | grep "Vendor\|Version\|Release" | tr -d "\t" | sed "s/Vendor//"'
 alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
+alias symflog="cd ~/sites/graham-dev.thenational.scot/app/logs && ~/bin/symfonylgo dev.log"
+alias ssh-stage2="ssh -t -A heraldweb4 ssh -t -A stage2"
+alias ssh-stage1="ssh -t -A heraldweb4 ssh -t -A stage1"
+
 
 # Tidy PWD 
 bash_prompt_command() {
@@ -114,3 +118,5 @@ source ~/.git-prompt.sh
 dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
+
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
