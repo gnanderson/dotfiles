@@ -5,7 +5,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -13,6 +13,7 @@ Plugin 'gnanderson/EasyColour'
 Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'spf13/piv'
+Plugin 'evidens/vim-twig'
 "Plugin 'ervandew/supertab'
 
 call vundle#end()
@@ -103,4 +104,4 @@ function! <SID>SynStack()
 	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-autocmd FileType c,cpp,java,php,go,javascript,yaml autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,go,javascript,yaml,js,css autocmd BufWritePre <buffer> :%s/\s\+$//e
