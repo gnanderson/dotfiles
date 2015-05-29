@@ -2,7 +2,6 @@
 set -o vi
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-export EDITOR=/usr/bin/vim
 #export ZEND_TOOL_INCLUDE_PATH="/data/php5/ZendFramework/library"
 
 ## Amazon AWS CLi tool
@@ -10,12 +9,6 @@ export EDITOR=/usr/bin/vim
 #export AWS_RDS_HOME="/home/ganderson/bin/rdsc"
 #export EC2_CERT=""
 #export EC2_PRIVATE_KEY=""
-
-# Extra PATH's
-#export PATH=$PATH:/home/ganderson/src/python/git-hg/bin
-
-# Dotfiles
-#export DOTFILES_DIR=~/.dotfiles
 
 # Chromium
 export XDG_CACHE_HOME=/tmp
@@ -42,7 +35,6 @@ export LFS=/mnt/lfs
 #source $HOME/.homesick/repos/homeshick/homeshick.sh
 
 # Aliases
-#alias vim='~/bin/vim'
 alias tmux='tmux -2'
 alias oscb='osc build openSUSE_13.1'
 alias oscba='osc build --no-verify openSUSE_13.1'
@@ -97,13 +89,6 @@ git_status() {
     echo '• '
 }
 
-hg_status() {
-    hg prompt --angle-brackets "\
-< on <branch>>\
-< at <tags|, >>\
-<status|modified|unknown><update><
-patches: <patches|join( → )>>" 2>/dev/null
-}
 
 # Colours
 # 
@@ -129,10 +114,9 @@ PROMPT_COMMAND=bash_prompt_command
 git_status="\[$COL1\]"'$(git_status)'
 user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
 current_dir="\[$COL1\]"'$NEW_PWD '
-source ~/.bash_git
+source ~/.git-prompt.sh
 dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
-
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"

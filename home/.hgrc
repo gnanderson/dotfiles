@@ -1,5 +1,3 @@
 [ui]
 username = Graham Anderson <graham.anderson@gmail.com>
 [extensions]
-prompt = ~/bin/prompt.py
-mq=
