@@ -54,7 +54,7 @@ hi link yamlType	Type
 hi link yamlComment	Comment
 hi link yamlBlock	Operator
 hi link yamlOperator	Operator
-hi link yamlDelimiter	Delimiter
+hi link yamlDelimiter	Operator
 hi link yamlString	String
 hi link yamlEscape	Special
 
