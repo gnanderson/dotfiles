@@ -104,4 +104,5 @@ function! <SID>SynStack()
 	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+autocmd Filetype php setlocal ts=4 sw=4 expandtab
 autocmd FileType c,cpp,java,php,go,javascript,yaml,js,css autocmd BufWritePre <buffer> :%s/\s\+$//e
