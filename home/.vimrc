@@ -86,5 +86,7 @@ set splitbelow
 set splitright
 
 autocmd Filetype php setlocal ts=4 sw=4 expandtab
+autocmd Filetype html setlocal ts=4 sw=4 expandtab
+autocmd Filetype twig setlocal ts=4 sw=4 expandtab
 autocmd BufWritePre * :%s/\s\+$//e
 "autocmd FileType c,cpp,java,php,go,javascript,yaml,js,css,vim,vimrc autocmd BufWritePre <buffer> :%s/\s\+$//e
