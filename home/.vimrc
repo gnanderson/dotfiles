@@ -1,11 +1,34 @@
 set nocompatible
 filetype off
-"
+
+if has('nvim')
+    let s:editor_root=expand("~/.config/nvim")
+else
+    let s:editor_root=expand("~/.vim")
+endif
+if has("unix")
+    let s:uname = system("uname")
+    let g:python_host_prog='/usr/bin/python'
+    if s:uname == "Darwin\n"
+        let g:python_host_prog='/usr/local/bin/python'
+    endif
+endif
+
 " Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
+let vundle_installed=1
+let vundle_readme=s:editor_root . '/bundle/Vundle.vim/README.md'
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    " silent execute "! mkdir -p ~/." . s:editor_path_name . "/bundle"
+    silent call mkdir(s:editor_root . '/bundle', "p")
+    silent execute "!git clone https://github.com/VundleVim/Vundle.vim.git " . s:editor_root . "/bundle/Vundle.vim"
+    let vundle_installed=0
+endif
+let &rtp = &rtp . ',' . s:editor_root . '/bundle/Vundle.vim/'
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -15,7 +38,11 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'spf13/piv'
 Plugin 'evidens/vim-twig'
 Plugin 'bling/vim-airline'
-
+if vundle_installed == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
 call vundle#end()
 
 filetype plugin indent on
