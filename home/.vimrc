@@ -35,9 +35,14 @@ Plugin 'scrooloose/syntastic'
 Plugin 'gnanderson/vim-monokai'
 Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'spf13/piv'
+"Plugin 'spf13/piv'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'evidens/vim-twig'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'craigemery/vim-autotag'
 if vundle_installed == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
@@ -83,6 +88,10 @@ set backspace=indent,eol,start
 "set wildmenu
 "set wildmode=longest:full,full
 
+" leader
+let mapleader=","
+nnoremap <leader>a :echo("\<leader\> works! It is set to <leader>")<CR>
+
 " 80 char column
 set colorcolumn=80
 highlight ColorColumn ctermbg=235
@@ -98,9 +107,16 @@ let g:go_fmt_command = "goimports"
 
 " airline
 let g:airline_theme= "murmur"
+let g:airline_powerline_fonts = 1
 
 "PHP disable auto fold
 let g:DisableAutoPHPFolding = 1
+
+" Syntastic
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+let g:syntastic_warning_symbol = '⚠'
+" let g:syntastic_error_symbol = 'EE'
 
 " Autocomplete
 highlight   Pmenu         ctermfg=green ctermbg=235
@@ -117,3 +133,13 @@ autocmd Filetype html setlocal ts=4 sw=4 expandtab
 autocmd Filetype twig setlocal ts=4 sw=4 expandtab
 autocmd BufWritePre * :%s/\s\+$//e
 "autocmd FileType c,cpp,java,php,go,javascript,yaml,js,css,vim,vimrc autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+"PHP namespaces
+function! IPhpInsertUse()
+	call PhpInsertUse()
+	call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>s <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>s :call PhpInsertUse()<CR>
+
+

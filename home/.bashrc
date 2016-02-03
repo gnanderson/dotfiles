@@ -1,7 +1,6 @@
 # command mode
 set -o vi
 
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 #export ZEND_TOOL_INCLUDE_PATH="/data/php5/ZendFramework/library"
 
 ## Amazon AWS CLi tool
@@ -28,11 +27,8 @@ test -s ~/.alias && . ~/.alias || true
 # LFS settings
 export LFS=/mnt/lfs
 
-# Tmux
-#[[ $TERM != "screen" ]] && tmux attach && exit
-
 # Homeshick
-#source $HOME/.homesick/repos/homeshick/homeshick.sh
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 # Aliases
 alias tmux='tmux -2'
@@ -117,4 +113,3 @@ dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status
 
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
