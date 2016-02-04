@@ -72,6 +72,9 @@ let g:go_fmt_command = "goimports"
 " airline
 let g:airline_theme= "murmur"
 
+" NERDTree
+map <silent> <C-n> :NERDTreeFocus<CR>
+
 "PHP disable auto fold
 let g:DisableAutoPHPFolding = 1
 
@@ -85,8 +88,9 @@ highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 set splitbelow
 set splitright
 
-autocmd Filetype php setlocal ts=4 sw=4 expandtab
-autocmd Filetype html setlocal ts=4 sw=4 expandtab
-autocmd Filetype twig setlocal ts=4 sw=4 expandtab
+autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype html setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
 autocmd BufWritePre * :%s/\s\+$//e
 "autocmd FileType c,cpp,java,php,go,javascript,yaml,js,css,vim,vimrc autocmd BufWritePre <buffer> :%s/\s\+$//e

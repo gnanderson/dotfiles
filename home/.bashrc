@@ -48,7 +48,7 @@ alias ssh-stage2="ssh -t -A heraldweb4 ssh -t -A stage2"
 alias ssh-stage1="ssh -t -A heraldweb4 ssh -t -A stage1"
 
 
-# Tidy PWD 
+# Tidy PWD
 bash_prompt_command() {
     local pwdmaxlen=40
     local trunc_symbol="…"
@@ -91,7 +91,7 @@ git_status() {
 
 
 # Colours
-# 
+#
 # 0 - Black
 # 1 - Red
 # 2 - Green
@@ -99,7 +99,7 @@ git_status() {
 # 4 - Blue
 # 5 - Magenta
 # 6 - Cyan
-# 7 - White 
+# 7 - White
 
 #COL1=$(tput bold)$(tput setaf 2) # Green (bold)
 COL1='\e[1;32m'

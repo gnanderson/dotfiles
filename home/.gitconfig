@@ -11,3 +11,5 @@
 	username = graham
 [credential "https://github.com"]
 	username = gnanderson
+[core]
+	editor = /usr/bin/vim
