@@ -29,6 +29,7 @@ export LFS=/mnt/lfs
 
 # Homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+source "$HOME/.func/docker.sh"
 
 # Aliases
 alias tmux='tmux -2'
@@ -36,8 +37,8 @@ alias oscb='osc build openSUSE_13.1'
 alias oscba='osc build --no-verify openSUSE_13.1'
 alias osca='osc -A https://obs.dev.andtech.eu:444'
 alias scp='scp -p'
-alias ls='ls -G'
-alias la='ls -laG'
+alias ls='ls --color=auto'
+alias la='ls --color=auto -la'
 alias bios='[ -f /usr/sbin/dmidecode ] && sudo -v && echo -n "Motherboard" && sudo /usr/sbin/dmidecode -t 1 | grep "Manufacturer\|Product Name\|Serial Number" | tr -d "\t" | sed "s/Manufacturer//" && echo -ne "\nBIOS" && sudo /usr/sbin/dmidecode -t 0 | grep "Vendor\|Version\|Release" | tr -d "\t" | sed "s/Vendor//"'
 alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
 
@@ -109,7 +110,9 @@ git_status="\[$COL1\]"'$(git_status)'
 user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
 current_dir="\[$COL1\]"'$NEW_PWD '
 source ~/.git-prompt.sh
-dvcs_status="\[$COL2\]"'$(__git_ps1 "(%s)")'"\n: \[$COL4\]"
+dvcs_status="\[$COL3\]\[$COL2\]"'$(__git_ps1 "(%s)")'"\[$COL4\]"
+docker_machine="\[$COL3\]\[$COL2\]"'$(__docker_machine_ps1)'"\n: \[$COL4\]"
 
-PS1=$git_status$user_time$current_dir$dvcs_status
+
+PS1=$git_status$user_time$current_dir$dvcs_status$docker_machine
 
