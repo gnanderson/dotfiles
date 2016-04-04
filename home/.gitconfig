@@ -7,6 +7,9 @@
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
 	fl = log -u
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg = !"git lg1"
 	dl = "!git ll -1"
 	dlc = diff --cached HEAD^
 [color]
@@ -14,7 +17,7 @@
 [push]
 	default = simple
 [credential]
-	helper = cache --timeout=3600
+	helper = cache --timeout=14400
 [credential "https://go.herald.scot"]
 	username = graham
 [credential "https://github.com"]

@@ -111,6 +111,7 @@ let g:airline_powerline_fonts = 1
 
 " NERDTree
 map <silent> <C-n> :NERDTreeFocus<CR>
+ let g:NERDTreeWinSize = 50
 
 "PHP disable auto fold
 let g:DisableAutoPHPFolding = 1
@@ -134,7 +135,11 @@ set splitright
 autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype html setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
-autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype htmldjango.twig setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype text.twig setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype html.twig setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype macro.twig setlocal ts=4 sts=4 sw=4 expandtab
 autocmd BufWritePre * :%s/\s\+$//e
 "autocmd FileType c,cpp,java,php,go,javascript,yaml,js,css,vim,vimrc autocmd BufWritePre <buffer> :%s/\s\+$//e
 
