@@ -10,6 +10,8 @@ filetype off
 
 " we may be using vim on older boxes still?
 if has('nvim')
+	" windowing system copy / pasta
+	set cb=unnamed
 	let s:editor_root=expand("~/.config/nvim")
 else
 	let s:editor_root=expand("~/.vim")
@@ -31,6 +33,8 @@ endif
 
 " now install the plugins
 call plug#begin('~/.config/nvim/plugged')
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 Plug 'benekastah/neomake'
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -42,12 +46,32 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'craigemery/vim-autotag'
 Plug 'evidens/vim-twig'
-Plug 'phpvim/phpcd.vim', { 'for': 'php' }
+Plug 'phpvim/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
 Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
+Plug 'ervandew/supertab'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'airblade/vim-rooter'
+Plug 'mileszs/ack.vim'
 call plug#end()
 
 " sanity
 filetype plugin indent on
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" file searching behaviour improvements
+let g:NERDTreeChDirMode       = 2
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPLastMode'
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_max_files = 50000
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_extensions = ['mixed', 'line', 'dir']
+" use ack.vim with silver searcher
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 "
 " Plugin configuration
@@ -75,10 +99,16 @@ let g:neomake_go_gobuild_maker = {
 			\ '%-G#%.%#'
 			\ }
 let g:neomake_go_enabled_makers = ['gobuild', 'golint', 'govet']
-let g:neomake_open_list = 2
+"let g:neomake_open_list = 2
 let g:neomake_php_enabled_makers = ['php', 'phpcs', 'phpmd']
 let g:neomake_php_phpcs_args_standard = 'Symfony2'
 let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
+
+" vim-rooter
+let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_patterns = ['.git', '.git/']
+let g:rooter_use_lcd = 1
+let g:rooter_silent_chdir = 1
 
 " colours
 syntax enable
@@ -106,6 +136,8 @@ set statusline=   " clear the statusline for when vimrc is reloaded
 
 " Smart tabbing / autoindenting
 " set smarttab
+set autoindent
+set smartindent
 
 " Backspace on windows
 set backspace=indent,eol,start
@@ -139,6 +171,11 @@ let g:airline_theme= "murmur"
 let g:airline_powerline_fonts = 1
 
 " NERDTree
+" For toggling
+noremap <Leader>n :NERDTreeToggle<cr>
+noremap <Leader>f :NERDTreeFind<cr>
+
+let NERDTreeShowHidden=1
 map <silent> <C-n> :NERDTreeFocus<CR>
 let g:NERDTreeWinSize = 50
 
@@ -149,10 +186,10 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " resize
-if bufwinnr(1)
-  map = <C-W>>
-  map - <C-W><
-endif
+" if bufwinnr(1)
+"   map = <C-W>>
+"   map - <C-W><
+" endif
 
 " Print full path
 map <C-f> :echo expand("%:p")<cr>
@@ -187,6 +224,7 @@ highlight   Pmenu         ctermfg=green ctermbg=235
 highlight   PmenuSel      ctermfg=white ctermbg=darkgray
 highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 
+
 " disable annoying backup/swap files
 " open splits in the *correct* place
 set splitbelow
@@ -206,7 +244,7 @@ augroup END " }
 
 " automatically change to files dir
 augroup behaviour " {
-	autocmd BufEnter * silent! lcd %:p:h
+	"autocmd BufEnter * silent! lcd %:p:h
 augroup END " }
 
 " cleanup - always
@@ -225,6 +263,9 @@ augroup reload_vimrc " {
 	autocmd!
 	autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+
+
+noremap <C-s> :Ack! -aQi <cword> <CR>
 
 
 "PHP namespaces

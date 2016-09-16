@@ -13,11 +13,11 @@ set -o vi
 export XDG_CACHE_HOME=/tmp
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:~/bin
 export GOPATH=~
 
-# Drush
-export PATH=$PATH:~/.composer/vendor/bin
+# CD path
+#export CDPATH=$GOPATH/src:~/Sites
 
 test -s ~/.alias && . ~/.alias || true
 
@@ -32,16 +32,21 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.func/docker.sh"
 
 # Aliases
+alias colours='for code in {0..255}; do echo -e "\e[38;05;${code}m $code: Test"; done'
 alias tmux='tmux -2'
 alias oscb='osc build openSUSE_13.1'
 alias oscba='osc build --no-verify openSUSE_13.1'
 alias osca='osc -A https://obs.dev.andtech.eu:444'
 alias scp='scp -p'
-alias ls='ls --color=auto'
-alias la='ls --color=auto -la'
+alias ls='ls -G'
+alias la='ls -G -la'
 alias bios='[ -f /usr/sbin/dmidecode ] && sudo -v && echo -n "Motherboard" && sudo /usr/sbin/dmidecode -t 1 | grep "Manufacturer\|Product Name\|Serial Number" | tr -d "\t" | sed "s/Manufacturer//" && echo -ne "\nBIOS" && sudo /usr/sbin/dmidecode -t 0 | grep "Vendor\|Version\|Release" | tr -d "\t" | sed "s/Vendor//"'
 alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
-
+alias gvg='cd ~/Sites/shop-gant/infrastructure && vagrant'
+alias hvg='cd ~/Sites/shop-gant/infrastrucutre && vagrant'
+alias dmach='docker-machine'
+alias dcc='docker rm $(docker ps -a -q)'
+alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $3}'\'')'
 
 # Tidy PWD
 bash_prompt_command() {
@@ -67,7 +72,7 @@ git_status() {
     untracked_files=`git ls-files --others --exclude-standard 2> /dev/null`
     status=''
 
-	if [ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ] ; then # We have staged files
+	if [ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working tree clean" ] ; then # We have staged files
        status="▲"
     fi
 
@@ -116,3 +121,10 @@ docker_machine="\[$COL3\]\[$COL2\]"'$(__docker_machine_ps1)'"\n: \[$COL4\]"
 
 PS1=$git_status$user_time$current_dir$dvcs_status$docker_machine
 
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+
+PATH="/Users/graham/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/graham/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/graham/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/graham/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/graham/perl5"; export PERL_MM_OPT;
