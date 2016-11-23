@@ -4,6 +4,7 @@
 
 " sanity
 set nocompatible
+set clipboard=unnamed
 
 " sanity
 filetype off
@@ -33,26 +34,28 @@ endif
 
 " now install the plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'benekastah/neomake'
 Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'gnanderson/vim-monokai'
-Plug 'fatih/vim-go'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-rooter'
+Plug 'benekastah/neomake'
 Plug 'craigemery/vim-autotag'
-Plug 'evidens/vim-twig'
-Plug 'phpvim/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
-Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
-Plug 'ervandew/supertab'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'airblade/vim-rooter'
+Plug 'ervandew/supertab'
+Plug 'evidens/vim-twig'
+Plug 'fatih/vim-go'
+Plug 'gnanderson/vim-monokai'
+Plug 'godlygeek/tabular'
 Plug 'mileszs/ack.vim'
+Plug 'phpvim/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 " sanity
@@ -82,23 +85,16 @@ if has('nvim')
 	let g:deoplete#ignore_sources = {}
 	let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
 	let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
+	let g:deoplete#sources#go#align_class = 1
 	" Use partial fuzzy matches like YouCompleteMe
 	call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+	call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+	call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
 endif
 
 
-"let neomake_verbose = 3
-let g:neomake_go_gobuild_maker = {
-			\ 'exe': 'sh',
-			\ 'args': ['-c', 'go build -o ' . neomake#utils#DevNull() . ' ./\$0', '%:h'],
-			\ 'errorformat':
-			\ '%W%f:%l: warning: %m,' .
-			\ '%E%f:%l:%c:%m,' .
-			\ '%E%f:%l:%m,' .
-			\ '%C%\s%\+%m,' .
-			\ '%-G#%.%#'
-			\ }
-let g:neomake_go_enabled_makers = ['gobuild', 'golint', 'govet']
+let neomake_verbose = 3
+let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 "let g:neomake_open_list = 2
 let g:neomake_php_enabled_makers = ['php', 'phpcs', 'phpmd']
 let g:neomake_php_phpcs_args_standard = 'Symfony2'
@@ -162,6 +158,15 @@ inoremap {<CR>  {<CR>}<Esc>O
 
 " show a dollar at the end of change field
 set cpoptions+=$
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Same when moving up and down
+noremap <C-d> <C-d>zz
+noremap <C-u> <C-u>zz
 
 " vim-go
 let g:go_fmt_command = "goimports"
@@ -236,6 +241,7 @@ augroup lang_indents " {
 	autocmd Filetype html setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd Filetype scss setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype htmldjango.twig setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype text.twig setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype html.twig setlocal ts=4 sts=4 sw=4 expandtab

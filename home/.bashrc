@@ -12,6 +12,12 @@ set -o vi
 # Chromium
 export XDG_CACHE_HOME=/tmp
 
+# Assembla
+export ASSEMBLA_KEY=1493917d2a26ecf9a1ef
+export ASSEMBLA_SECRET=8c72a63cb9ea69e49fdd61cb196b553028523f1e
+export ASSEMBLA_SPACE="GANT AB"
+
+
 # Go
 export PATH=$PATH:/usr/local/go/bin:~/bin
 export GOPATH=~
