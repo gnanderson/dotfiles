@@ -17,7 +17,7 @@ export ASSEMBLA_SPACE="GANT AB"
 
 
 # Go
-export PATH=$PATH:/usr/local/go/bin:~/bin
+PATH=/usr/local/go/bin:$PATH
 export GOPATH=~
 
 # CD path
@@ -32,7 +32,6 @@ test -s ~/.alias && . ~/.alias || true
 export LFS=/mnt/lfs
 
 # Homeshick
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.func/docker.sh"
 
 # Aliases
@@ -129,8 +128,4 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
 	source ~/.bashrc_windows
 fi
 
-PATH="/Users/graham/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/graham/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/graham/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/graham/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/graham/perl5"; export PERL_MM_OPT;
+export PATH
