@@ -34,33 +34,76 @@ endif
 
 " now install the plugins
 call plug#begin('~/.config/nvim/plugged')
+" editor feature plugins
+Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'airblade/vim-rooter'
 Plug 'benekastah/neomake'
-Plug 'craigemery/vim-autotag'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'ervandew/supertab'
-Plug 'evidens/vim-twig'
-Plug 'fatih/vim-go'
 Plug 'gnanderson/vim-monokai'
 Plug 'godlygeek/tabular'
 Plug 'mileszs/ack.vim'
 Plug 'phpvim/phpcd.vim', { 'for': 'php' , 'do': 'composer update' }
+Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'christoomey/vim-tmux-navigator'
+" Go related plugins
+Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'plasticboy/vim-markdown'
+" PHP related plugins
+Plug 'evidens/vim-twig'
+Plug 'phpstan/vim-phpstan'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'sniphpets/sniphpets'
+Plug 'sniphpets/sniphpets-common'
+Plug 'sniphpets/sniphpets-phpunit'
+Plug 'sniphpets/sniphpets-symfony'
+
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
 " sanity
 filetype plugin indent on
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+"
+" Plugin configuration
+"
+
+" PHP namespaces
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>pnu <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>pnu :call PhpInsertUse()<CR>
+
+function! IPhpExpandClass()
+    call PhpExpandClass()
+    call feedkeys('a', 'n')
+endfunction
+autocmd FileType php inoremap <Leader>pne <Esc>:call IPhpExpandClass()<CR>
+autocmd FileType php noremap <Leader>pne :call PhpExpandClass()<CR>
+let g:php_namespace_sort_after_insert=1
+
+"vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " file searching behaviour improvements
 let g:NERDTreeChDirMode       = 2
@@ -76,28 +119,52 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-"
-" Plugin configuration
-"
+" UltiSnips
+" Disable built-in <C-x><C-k> to be able to go backward
+inoremap <C-x><C-k> <NOP>
+let g:UltiSnipsExpandTrigger='<C-j>'
+let g:UltiSnipsListSnippets='<C-l>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+let g:ultisnips_php_scalar_types = 1
 
+" deoplete-go
 if has('nvim')
+	let g:deoplete#auto_completion_start_length = 1
 	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#sources = {}
+	let g:deoplete#sources._ = ['tag', 'ultisnips', 'buffer', 'file', 'member', 'omni']
 	let g:deoplete#ignore_sources = {}
-	let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
-	let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
+	let g:deoplete#ignore_sources.php = {}
+	let g:deoplete#ignore_sources.php = ['omni', 'buffer', 'file', 'member']
+	let g:deoplete#sources.php = {}
+	let g:deoplete#sources.php = ['phpcd', 'tag', 'ultisnips']
+	let g:deoplete#ignore_sources.go = {}
+	let g:deoplete#ignore_sources.go = ['omni', 'buffer', 'file', 'member']
 	let g:deoplete#sources#go#align_class = 1
+	let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+
 	" Use partial fuzzy matches like YouCompleteMe
-	call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-	call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-	call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+	"call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+	"call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+	"call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
 endif
 
+"gutentags
+let g:gutentags_cache_dir = '~/.vim/gutentags'
+let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
+                            \ '*.phar', '*.ini', '*.rst', '*.md',
+                            \ '*vendor/*/test*', '*vendor/*/Test*',
+                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+                            \ '*infrastructure/**', '*vagrant/*',
+							\ '*var/cache*', '*var/log*', '*node_modules/*']
 
+" neomake
 let neomake_verbose = 3
 let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 "let g:neomake_open_list = 2
-let g:neomake_php_enabled_makers = ['php', 'phpcs', 'phpmd']
-let g:neomake_php_phpcs_args_standard = 'Symfony2'
+"let g:neomake_php_enabled_makers = ['php', 'phpcs', 'phpmd']
+let g:neomake_php_phpcs_args_standard = '~/Sites/shop-gant/cs-ruleset.xml'
 let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
 
 " vim-rooter
@@ -105,6 +172,7 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 let g:rooter_patterns = ['.git', '.git/']
 let g:rooter_use_lcd = 1
 let g:rooter_silent_chdir = 1
+
 
 " colours
 syntax enable
@@ -190,11 +258,10 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" resize
-" if bufwinnr(1)
-"   map = <C-W>>
-"   map - <C-W><
-" endif
+" open splits in the *correct* place
+set splitbelow
+set splitright
+
 
 " Print full path
 map <C-f> :echo expand("%:p")<cr>
@@ -204,12 +271,14 @@ if has('nvim')
   " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
   " the top again
   tnoremap <Leader>q <C-\><C-n>gg<cr>
+  " terminfo is fuxored on mac osx
+  nmap <BS> <C-W>h
 
   " mappings to move out from terminal to other views
-  tnoremap <C-h> <C-\><C-n><C-w>h
-  tnoremap <C-j> <C-\><C-n><C-w>j
-  tnoremap <C-k> <C-\><C-n><C-w>k
-  tnoremap <C-l> <C-\><C-n><C-w>l
+  "tnoremap <C-h> <C-\><C-n><C-w>h
+  "tnoremap <C-j> <C-\><C-n><C-w>j
+  "tnoremap <C-k> <C-\><C-n><C-w>k
+  "tnoremap <C-l> <C-\><C-n><C-w>l
 
   " always start terminal in insert mode
   autocmd BufWinEnter,WinEnter term://* startinsert
@@ -229,11 +298,6 @@ highlight   Pmenu         ctermfg=green ctermbg=235
 highlight   PmenuSel      ctermfg=white ctermbg=darkgray
 highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 
-
-" disable annoying backup/swap files
-" open splits in the *correct* place
-set splitbelow
-set splitright
 
 " yeah - wtf
 augroup lang_indents " {
@@ -271,8 +335,8 @@ augroup reload_vimrc " {
 augroup END " }
 
 
+map <silent> <leader>jd :CtrlPTag<cr><C-\>w
 noremap <C-s> :Ack! -aQi <cword> <CR>
-
 
 "PHP namespaces
 "function! IPhpInsertUse()

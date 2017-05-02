@@ -1,8 +1,6 @@
 # command mode
 set -o vi
 
-#export ZEND_TOOL_INCLUDE_PATH="/data/php5/ZendFramework/library"
-
 ## Amazon AWS CLi tool
 #export EC2_HOME="/home/ganderson/bin/ec2"
 #export AWS_RDS_HOME="/home/ganderson/bin/rdsc"
@@ -15,10 +13,9 @@ export XDG_CACHE_HOME=/tmp
 # Assembla
 export ASSEMBLA_SPACE="GANT AB"
 
-
 # Go
-PATH=/usr/local/go/bin:$PATH
-export GOPATH=~
+PATH=~/go/bin:/usr/local/go/bin:$PATH
+export GOPATH=~/go
 
 # CD path
 #export CDPATH=$GOPATH/src:~/Sites
@@ -41,11 +38,13 @@ alias scp='scp -p'
 alias ls='ls -G'
 alias la='ls -G -la'
 alias gvg='cd ~/Sites/shop-gant/infrastructure && vagrant'
-alias hvg='cd ~/Sites/shop-gant/infrastrucutre && vagrant'
 alias dmach='docker-machine'
 alias dcc='docker rm $(docker ps -a -q)'
 alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $7}'\'')'
-alias vim='/usr/bin/nvim'
+alias vim='/usr/local/bin/nvim'
+alias testse='cd ~/Sites/shop-gant && bin/phpunit -c app_se/phpunit.xml.dist'
+alias testuk='cd ~/Sites/shop-gant && bin/phpunit -c app/phpunit.xml.dist'
+alias testphx='cd ~/Sites/shop-gant/vendor/markup/phoenix && bin/phpunit'
 
 # Tidy PWD
 bash_prompt_command() {
@@ -127,5 +126,8 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
 	source ~/.bashrc_windows
 fi
+
+# dont commit e.g. homebrew token secrets
+source ~/.bashrc_secrets
 
 export PATH

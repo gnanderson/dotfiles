@@ -12,6 +12,7 @@
 	lg = !"git lg1"
 	dl = "!git ll -1"
 	dlc = diff --cached HEAD^
+	whatadded = log --diff-filter=A
 [color]
 	ui = auto
 [push]
