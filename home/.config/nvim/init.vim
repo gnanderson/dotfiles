@@ -76,7 +76,7 @@ call plug#end()
 " sanity
 filetype plugin indent on
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
+let g:session_autoload = 'no'
 "
 " Plugin configuration
 "
