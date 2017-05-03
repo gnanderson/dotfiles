@@ -133,17 +133,17 @@ if has('nvim')
 	let g:deoplete#auto_completion_start_length = 1
 	let g:deoplete#enable_at_startup = 1
 	let g:deoplete#sources = {}
-	let g:deoplete#sources._ = ['tag', 'ultisnips', 'buffer', 'file', 'member', 'omni']
-	let g:deoplete#ignore_sources = {}
-	let g:deoplete#ignore_sources.php = {}
-	let g:deoplete#ignore_sources.php = ['omni', 'buffer', 'file', 'member']
-	let g:deoplete#sources.php = {}
-	let g:deoplete#sources.php = ['phpcd', 'tag', 'ultisnips']
-	let g:deoplete#ignore_sources.go = {}
-	let g:deoplete#ignore_sources.go = ['omni', 'buffer', 'file', 'member']
+	let g:deoplete#sources._ = ['tag', 'ultisnips', 'member', 'go', 'phpcd']
+	" go language completion
+	let g:deoplete#sources#go#pointer = 1
+	let g:deoplete#sources#go#gocode_binary = '~/go/bin/gocode'
 	let g:deoplete#sources#go#align_class = 1
 	let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-
+	"let g:deoplete#ignore_sources = {}
+	"let g:deoplete#ignore_sources.php = {}
+	"let g:deoplete#ignore_sources.php = ['omni', 'buffer', 'file', 'member']
+	let g:deoplete#sources.php = {}
+	let g:deoplete#sources.php = ['tag', 'ultisnips', 'phpcd']
 	" Use partial fuzzy matches like YouCompleteMe
 	"call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
 	"call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
