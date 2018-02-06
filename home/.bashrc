@@ -37,7 +37,7 @@ alias tmux='tmux -2'
 alias scp='scp -p'
 alias ls='ls -G'
 alias la='ls -G -la'
-alias gvg='cd ~/Sites/shop-gant/infrastructure && vagrant'
+alias gvg='cd ~/Sites/chef-repos/gant-chef && vagrant'
 alias dmach='docker-machine'
 alias dcc='docker rm $(docker ps -a -q)'
 alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $7}'\'')'
@@ -45,6 +45,9 @@ alias vim='nvim'
 alias testse='cd ~/Sites/shop-gant && bin/phpunit -c app_se/phpunit.xml.dist'
 alias testuk='cd ~/Sites/shop-gant && bin/phpunit -c app/phpunit.xml.dist'
 alias testphx='cd ~/Sites/shop-gant/vendor/markup/phoenix && bin/phpunit'
+alias prune='git remote prune origin'
+alias gitprune='git branch -r | awk '\''{print $1}'\'' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '\''{print $1}'\'''
+alias loc='find . -name '\''*.php'\'' | xargs wc -l'
 
 # Tidy PWD
 bash_prompt_command() {
@@ -87,6 +90,13 @@ git_status() {
     echo '• '
 }
 
+gitwork() {
+	for branch in $(git branch); do
+		echo $line
+		git checkout $branch && git log --since="31 days ago" --author="Graham Anderson" --date-order --reverse --pretty=format:"%h%x09%an%x09%ad%x09%s"
+	done
+}
+
 
 # Colours
 #
@@ -123,6 +133,7 @@ if [ "$(uname)" == "Darwin" ]; then
 	source ~/.bashrc_darwin
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 	source ~/.bashrc_linux
+# TODO Cygwin only - update for new Windows subsystem for linux
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
 	source ~/.bashrc_windows
 fi

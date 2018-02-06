@@ -163,9 +163,9 @@ let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
 let neomake_verbose = 3
 let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 "let g:neomake_open_list = 2
-"let g:neomake_php_enabled_makers = ['php', 'phpcs', 'phpmd']
+let g:neomake_php_enabled_makers = ['php', 'phpcs', 'phpmd']
 let g:neomake_php_phpcs_args_standard = '~/Sites/shop-gant/cs-ruleset.xml'
-let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
+let g:neomake_javascript_enabled_makers = ['jscs', 'eslint']
 
 " vim-rooter
 let g:rooter_change_directory_for_non_project_files = 'current'
@@ -275,10 +275,10 @@ if has('nvim')
   nmap <BS> <C-W>h
 
   " mappings to move out from terminal to other views
-  "tnoremap <C-h> <C-\><C-n><C-w>h
-  "tnoremap <C-j> <C-\><C-n><C-w>j
-  "tnoremap <C-k> <C-\><C-n><C-w>k
-  "tnoremap <C-l> <C-\><C-n><C-w>l
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
 
   " always start terminal in insert mode
   autocmd BufWinEnter,WinEnter term://* startinsert
