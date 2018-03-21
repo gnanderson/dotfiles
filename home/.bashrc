@@ -1,17 +1,11 @@
 # command mode
 set -o vi
 
-## Amazon AWS CLi tool
-#export EC2_HOME="/home/ganderson/bin/ec2"
-#export AWS_RDS_HOME="/home/ganderson/bin/rdsc"
-#export EC2_CERT=""
-#export EC2_PRIVATE_KEY=""
+# editor
+export EDITOR=nvim
 
 # Chromium
 export XDG_CACHE_HOME=/tmp
-
-# Assembla
-export ASSEMBLA_SPACE="GANT AB"
 
 # Go
 PATH=~/go/bin:/usr/local/go/bin:$PATH
@@ -22,14 +16,8 @@ export GOPATH=~/go
 
 test -s ~/.alias && . ~/.alias || true
 
-# amazon tools path
-#export PATH=$PATH:$EC2_HOME/bin:$AWS_RDS_HOME/bin
-
-# LFS settings
-export LFS=/mnt/lfs
-
-# Homeshick
 source "$HOME/.func/docker.sh"
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 # Aliases
 alias colours='for code in {0..255}; do echo -e "\e[38;05;${code}m $code: Test"; done'
@@ -37,7 +25,7 @@ alias tmux='tmux -2'
 alias scp='scp -p'
 alias ls='ls -G'
 alias la='ls -G -la'
-alias gvg='cd ~/Sites/chef-repos/gant-chef && vagrant'
+alias gvg='cd ~/Sites/gant-chef && vagrant'
 alias dmach='docker-machine'
 alias dcc='docker rm $(docker ps -a -q)'
 alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $7}'\'')'
@@ -138,7 +126,6 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
 	source ~/.bashrc_windows
 fi
 
-# dont commit e.g. homebrew token secrets
 source ~/.bashrc_secrets
 
 export PATH

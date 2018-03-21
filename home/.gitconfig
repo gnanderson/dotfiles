@@ -24,6 +24,6 @@
 [credential "https://github.com"]
 	username = gnanderson
 [core]
-	editor = /usr/local/bin/vim
+	editor = nvim
 [merge]
 	ff = only

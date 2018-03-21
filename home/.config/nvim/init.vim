@@ -57,6 +57,7 @@ Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'xolox/vim-session'
 " Go related plugins
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -70,6 +71,7 @@ Plug 'sniphpets/sniphpets-common'
 Plug 'sniphpets/sniphpets-phpunit'
 Plug 'sniphpets/sniphpets-symfony'
 
+" dependency for deoplete
 Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
