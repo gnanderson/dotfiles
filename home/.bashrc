@@ -9,7 +9,14 @@ export XDG_CACHE_HOME=/tmp
 
 # Go
 PATH=~/go/bin:/usr/local/go/bin:$PATH
-export GOPATH=~/go
+#export GOPATH=~/go
+
+# History
+HISTCONTROL=ignoreboth:erasedups
+HISTSIZE=10000
+HISTFILESIZE=10000
+HISTIGNORE=ssh:pwd:yubifix:history
+shopt -s histappend
 
 # CD path
 #export CDPATH=$GOPATH/src:~/Sites
@@ -36,6 +43,26 @@ alias testphx='cd ~/Sites/shop-gant/vendor/markup/phoenix && bin/phpunit'
 alias prune='git remote prune origin'
 alias gitprune='git branch -r | awk '\''{print $1}'\'' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '\''{print $1}'\'''
 alias loc='find . -name '\''*.php'\'' | xargs wc -l'
+alias cat="bat"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+alias f="fzf --preview 'bat --color \"always\" {}'"
+
+fif() {
+	rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' $1 \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " start ":" end}' \
+	| fzf --preview 'bat --wrap character --color always {1} --line-range {2}' --preview-window wrap
+}
 
 # Tidy PWD
 bash_prompt_command() {
@@ -107,6 +134,8 @@ COL3='\e[1;37m'
 COL4='\e[0;37m'
 
 PROMPT_COMMAND=bash_prompt_command
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
 git_status="\[$COL1\]"'$(git_status)'
 user_time="\[$COL2\]\u\[$COL3\]@\h [\#|\!] "
 current_dir="\[$COL1\]"'$NEW_PWD '
@@ -129,3 +158,6 @@ fi
 source ~/.bashrc_secrets
 
 export PATH
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

@@ -1,4 +1,4 @@
-PATH=$PATH:~/bin
+PATH=~/bin:/usr/local/bin:$PATH
 
 # homebrew bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -24,4 +24,13 @@ PERL_LOCAL_LIB_ROOT="/Users/graham/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB
 PERL_MB_OPT="--install_base \"/Users/graham/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/graham/perl5"; export PERL_MM_OPT;
 
+alias uatdb="ssh -L 3306:localhost:3306 gant-aws-db"
+alias ukproddb="ssh -L 3307:b7e41f1f6ec78a1bc1faf86951e3a5920fc8bbd5.rackspaceclouddb.com:3306 162.13.81.210"
+alias release="npm --no-git-tag-version version"
+
+# shitty mac homebrew and shitty mac php
+export PATH="/usr/local/opt/php@7.1/bin:/Users/graham/bin/apache-maven-3.6.0/bin:$PATH"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home"
+
 eval "$(jira --completion-script-bash)"
+eval "$(rbenv init -)"
