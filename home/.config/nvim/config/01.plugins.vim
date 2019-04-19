@@ -40,14 +40,17 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'evidens/vim-twig'
 Plug 'phpstan/vim-phpstan'
 Plug 'stephpy/vim-php-cs-fixer'
-Plug 'arnaud-lb/vim-php-namespace'
+"Plug 'arnaud-lb/vim-php-namespace'
 Plug 'sniphpets/sniphpets'
 Plug 'sniphpets/sniphpets-common'
 Plug 'sniphpets/sniphpets-phpunit'
 Plug 'sniphpets/sniphpets-symfony'
 Plug 'mustache/vim-mustache-handlebars'
 " dependency for deoplete
-"Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'jremmen/vim-ripgrep'
 call plug#end()
 
 " sanity
@@ -157,11 +160,12 @@ let NERDTreeShowHidden=1
 map <silent> <C-n> :NERDTreeFocus<CR>
 let g:NERDTreeWinSize = 50
 
-"" gutentags
-"let g:gutentags_cache_dir = '~/.vim/gutentags'
-"let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
-"                            \ '*.phar', '*.ini', '*.rst', '*.md',
-"                            \ '*vendor/*/test*', '*vendor/*/Test*',
-"                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
-"                            \ '*infrastructure/**', '*vagrant/*',
-"							\ '*var/cache*', '*var/log*', '*node_modules/*']
+" gutentags
+let g:gutentags_cache_dir = '~/.vim/gutentags'
+let g:gutentags_ctags_exclude = [ '*.css', '*.html', '*.js', '*.json', '*.xml',
+			\ '*.xsd', '*.xsl', '*.yaml', '*.yml', '*.sh', '*.mk',
+			\ '*.phar', '*.ini', '*.rst', '*.md', 'Makefile',
+			\ 'README', '*vendor/*/test*', '*vendor/*/Test*',
+			\ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+			\ '*infrastructure/**', '*vagrant/*', '*build/*',
+			\ '*var/cache*', '*var/log*', '*node_modules/*']
