@@ -64,6 +64,10 @@ fif() {
 	| fzf --preview 'bat --wrap character --color always {1} --line-range {2}' --preview-window wrap
 }
 
+alias tgp='terragrunt plan'
+alias tga='terragrunt apply'
+alias tgd='terragrunt destroy'
+
 # Tidy PWD
 bash_prompt_command() {
     local pwdmaxlen=40
@@ -160,4 +164,4 @@ source ~/.bashrc_secrets
 export PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"

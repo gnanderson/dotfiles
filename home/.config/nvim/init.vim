@@ -12,7 +12,7 @@ else
 	let s:editor_root=expand("~/.vim")
 endif
 
-" max osx shenanigens
+" mac osx shenanigens
 if has("unix")
 	let s:uname = system("uname")
 	let g:python_host_prog='/usr/bin/python'
