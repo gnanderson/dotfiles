@@ -1,0 +1,15 @@
+alias colours='for code in {0..255}; do echo -e "\e[38;05;${code}m $code: Test"; done'
+alias tmux='tmux -2'
+alias scp='scp -p'
+alias ls='ls -G'
+alias la='ls -G -la'
+alias gvg='cd ~/Sites/gant-chef && vagrant'
+alias dmach='docker-machine'
+alias dcc='docker rm $(docker ps -a -q)'
+alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $7}'\'')'
+alias vim='nvim'
+alias prune='git remote prune origin'
+alias gitprune='git branch -r | awk '\''{print $1}'\'' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '\''{print $1}'\'''
+alias cat="bat"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias f="fzf --preview 'bat --color \"always\" {}'"
