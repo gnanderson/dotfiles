@@ -8,7 +8,7 @@ export EDITOR=nvim
 export XDG_CACHE_HOME=/tmp
 
 # Go
-PATH=~/go/bin:/usr/local/go/bin:$PATH
+PATH=~/bin:/usr/local/go/bin:~/.local/bin:$PATH
 #export GOPATH=$HOME
 
 # Aliases
