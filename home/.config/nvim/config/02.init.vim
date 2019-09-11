@@ -55,19 +55,12 @@ highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 
 " yeah - wtf
 augroup lang_indents " {
-	autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
 	autocmd Filetype json setlocal ts=2 sts=2 sw=2 expandtab
 	autocmd Filetype html setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype scss setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd Filetype htmldjango.twig setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd Filetype text.twig setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd Filetype html.twig setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd Filetype macro.twig setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd Filetype mustache setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd Filetype html.mustache setlocal ts=4 sts=4 sw=4 expandtab
 augroup END " }
 
 " cleanup - always
@@ -78,7 +71,6 @@ augroup END " }
 " autocomplete
 augroup autocomplete " {
 	autocmd BufWritePost * Neomake
-	autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 augroup END " }
 
 " reload after editing config

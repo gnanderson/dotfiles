@@ -9,7 +9,10 @@ export XDG_CACHE_HOME=/tmp
 
 # Go
 PATH=~/go/bin:/usr/local/go/bin:$PATH
-#export GOPATH=~/go
+#export GOPATH=$HOME
+
+# Aliases
+test -s ~/.bashrc_aliases && . ~/.bashrc_aliases || true
 
 # History
 HISTCONTROL=ignoreboth:erasedups
@@ -18,36 +21,11 @@ HISTFILESIZE=10000
 HISTIGNORE=ssh:pwd:yubifix:history
 shopt -s histappend
 
-# CD path
-#export CDPATH=$GOPATH/src:~/Sites
-
-test -s ~/.alias && . ~/.alias || true
-
-source "$HOME/.func/docker.sh"
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-
-# Aliases
-alias colours='for code in {0..255}; do echo -e "\e[38;05;${code}m $code: Test"; done'
-alias tmux='tmux -2'
-alias scp='scp -p'
-alias ls='ls -G'
-alias la='ls -G -la'
-alias gvg='cd ~/Sites/gant-chef && vagrant'
-alias dmach='docker-machine'
-alias dcc='docker rm $(docker ps -a -q)'
-alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $7}'\'')'
-alias vim='nvim'
-alias testse='cd ~/Sites/shop-gant && bin/phpunit -c app_se/phpunit.xml.dist'
-alias testuk='cd ~/Sites/shop-gant && bin/phpunit -c app/phpunit.xml.dist'
-alias testphx='cd ~/Sites/shop-gant/vendor/markup/phoenix && bin/phpunit'
-alias prune='git remote prune origin'
-alias gitprune='git branch -r | awk '\''{print $1}'\'' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '\''{print $1}'\'''
-alias loc='find . -name '\''*.php'\'' | xargs wc -l'
-alias cat="bat"
-alias preview="fzf --preview 'bat --color \"always\" {}'"
-
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-alias f="fzf --preview 'bat --color \"always\" {}'"
+# shellcheck source=.func/docker.sh
+source "$HOME/.func/docker.sh"
+# shellcheck source=.homesick/repos/homeshick/homeshick.sh
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 fif() {
 	rg  \
@@ -59,7 +37,7 @@ fif() {
 	--ignore-case \
 	--hidden \
 	--follow \
-	--glob '!.git/*' $1 \
+	--glob '!.git/*' "$1" \
 	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " start ":" end}' \
 	| fzf --preview 'bat --wrap character --color always {1} --line-range {2}' --preview-window wrap
 }
@@ -88,8 +66,8 @@ git_status() {
 
     hg root >/dev/null 2>/dev/null && echo '☿ ' && return
 
-    modified_files=`git diff --raw 2> /dev/null`
-    untracked_files=`git ls-files --others --exclude-standard 2> /dev/null`
+	modified_files=$(git diff --raw 2> /dev/null)
+	untracked_files=$(git ls-files --others --exclude-standard 2> /dev/null)
     status=''
 
 	if [ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working tree clean" ] ; then # We have staged files
@@ -111,8 +89,8 @@ git_status() {
 
 gitwork() {
 	for branch in $(git branch); do
-		echo $line
-		git checkout $branch && git log --since="31 days ago" --author="Graham Anderson" --date-order --reverse --pretty=format:"%h%x09%an%x09%ad%x09%s"
+		echo "$branch"
+		git checkout "$branch" && git log --since="31 days ago" --author="Graham Anderson" --date-order --reverse --pretty=format:"%h%x09%an%x09%ad%x09%s"
 	done
 }
 
@@ -151,11 +129,14 @@ docker_machine="\[$COL3\]\[$COL2\]"'$(__docker_machine_ps1)'"\n: \[$COL4\]"
 PS1=$git_status$user_time$current_dir$dvcs_status$docker_machine
 
 if [ "$(uname)" == "Darwin" ]; then
+    # shellcheck source=.bashrc_darwin
 	source ~/.bashrc_darwin
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    # shellcheck source=.bashrc_linux
 	source ~/.bashrc_linux
 # TODO Cygwin only - update for new Windows subsystem for linux
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+    # shellcheck source=.bashrc_windows
 	source ~/.bashrc_windows
 fi
 

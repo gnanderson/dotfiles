@@ -39,11 +39,11 @@ splitw -v -p 50 'bash'
 selectp -t 3
 splitw -v -p 50 'bash'
 
-neww -n Vim 'nvim -c "cd ~/go/src/"'
+neww -n Vim 'nvim -c "cd ~/src"'
 setw -t 3 remain-on-exit on
 selectw -t 3
 
-neww -n Vim 'nvim -c "cd ~/Sites/shop-gant"'
+neww -n Vim 'nvim -c "cd ~/src"'
 setw -t 4 remain-on-exit on
 selectw -t 4
 

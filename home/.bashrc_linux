@@ -18,7 +18,10 @@ export GPG_TTY=$(tty)
 export KUBECONFIG=$HOME/.kube/config
 export ANSIBLE_TF_BIN=terragrunt
 export CDPATH=.:$HOME/src/skein/skein-infra:$HOME/src/grahamanderson.scot
+export GOPATH=$HOME
 export GOCACHE=$HOME/.cache/go-build
+export GOPROX=Yhttps://proxy.golang.org
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/graham/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/path.bash.inc'; fi
@@ -27,3 +30,4 @@ if [ -f '/home/graham/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '
 if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+gpgconf --create-socketdir
