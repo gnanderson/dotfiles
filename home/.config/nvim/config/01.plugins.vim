@@ -1,5 +1,5 @@
 " try to get plug.vim if its not there
-if empty(glob("~/.config/nvim/autoload/plug.vim"))
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
 	execute '!curl -fLo --create-dirs ~/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
@@ -36,7 +36,7 @@ Plug 'fatih/vim-go'
 "Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " dependency for deoplete
-Plug 'ludovicchabant/vim-gutentags'
+"Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
@@ -48,7 +48,7 @@ call plug#end()
 filetype plugin indent on
 
 " supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = '<c-n>'
 
 " sessions
 let g:session_autoload = 'no'
@@ -56,7 +56,7 @@ let g:session_autoload = 'no'
 " hashivim
 let g:terraform_fmt_on_save=1
 
-let g:airline_theme= "murmur"
+let g:airline_theme= 'murmur'
 let g:airline_powerline_fonts = 1
 
 "vim-go
@@ -67,7 +67,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_textobj_include_function_doc = 1
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = 'goimports'
 let g:go_def_mode='gopls'
 
 " file searching behaviour improvements
@@ -94,9 +94,9 @@ let g:ultisnips_php_scalar_types = 1
 
 " neomake
 let neomake_verbose = 3
-let g:neomake_go_enabled_makers = ['go', 'golint', 'go vet']
-"let g:neomake_open_list = 2
-let g:neomake_javascript_enabled_makers = ['jscs', 'eslint']
+"let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
+let g:neomake_open_list = 2
+"let g:neomake_javascript_enabled_makers = ['jscs', 'eslint']
 
 " vim-rooter
 let g:rooter_change_directory_for_non_project_files = 'current'
@@ -114,11 +114,11 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 let g:NERDTreeWinSize = 50
 
 " gutentags
-let g:gutentags_cache_dir = '~/.vim/gutentags'
-let g:gutentags_ctags_exclude = [ '*.css', '*.html', '*.js', '*.json', '*.xml',
-			\ '*.xsd', '*.xsl', '*.yaml', '*.yml', '*.sh', '*.mk',
-			\ '*.phar', '*.ini', '*.rst', '*.md', 'Makefile',
-			\ 'README', '*vendor/*/test*', '*vendor/*/Test*',
-			\ '*vendor/*/fixture*', '*vendor/*/Fixture*',
-			\ '*infrastructure/**', '*vagrant/*', '*build/*',
-			\ '*var/cache*', '*var/log*', '*node_modules/*']
+"let g:gutentags_cache_dir = '~/.vim/gutentags'
+"let g:gutentags_ctags_exclude = [ '*.css', '*.html', '*.js', '*.json', '*.xml',
+"			\ '*.xsd', '*.xsl', '*.yaml', '*.yml', '*.sh', '*.mk',
+"			\ '*.phar', '*.ini', '*.rst', '*.md', 'Makefile',
+"			\ 'README', '*vendor/*/test*', '*vendor/*/Test*',
+"			\ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+"			\ '*infrastructure/**', '*vagrant/*', '*build/*',
+"			\ '*var/cache*', '*var/log*', '*node_modules/*']
