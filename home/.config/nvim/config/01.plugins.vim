@@ -26,6 +26,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tommcdo/vim-exchange'
+Plug 'rbgrouleff/bclose.vim'
 " language server / autocomplete plugins
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -111,7 +112,7 @@ noremap <Leader>f :NERDTreeFind<cr>
 let g:NERDTreeChDirMode       = 2
 let NERDTreeShowHidden=1
 map <silent> <C-n> :NERDTreeFocus<CR>
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 35
 
 " gutentags
 "let g:gutentags_cache_dir = '~/.vim/gutentags'

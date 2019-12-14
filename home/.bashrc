@@ -7,6 +7,8 @@ export EDITOR=vim
 # Chromium
 export XDG_CACHE_HOME=/tmp
 
+export CDPATH=.:$HOME:$HOME/LumenWorkspace
+
 # Go
 PATH=~/bin:/usr/local/go/bin:~/.local/bin:$PATH
 #export GOPATH=$HOME
@@ -45,46 +47,47 @@ fif() {
 alias tgp='terragrunt plan'
 alias tga='terragrunt apply'
 alias tgd='terragrunt destroy'
+alias s3='s3cmd'
 
 # Tidy PWD
 bash_prompt_command() {
-    local pwdmaxlen=40
-    local trunc_symbol="…"
-    local dir=${PWD##*/}
-    pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
-    NEW_PWD=${PWD/#$HOME/\~}
-    local pwdoffset=$(( ${#NEW_PWD} - pwdmaxlen ))
-    if [ ${pwdoffset} -gt "0" ]
-    then
-        NEW_PWD=${NEW_PWD:$pwdoffset:$pwdmaxlen}
-        NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
-    fi
+	local pwdmaxlen=40
+	local trunc_symbol="…"
+	local dir=${PWD##*/}
+	pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
+	NEW_PWD=${PWD/#$HOME/\~}
+	local pwdoffset=$(( ${#NEW_PWD} - pwdmaxlen ))
+	if [ ${pwdoffset} -gt "0" ]
+	then
+		NEW_PWD=${NEW_PWD:$pwdoffset:$pwdmaxlen}
+		NEW_PWD=${trunc_symbol}/${NEW_PWD#*/}
+	fi
 }
 
 # Git staging/index indicator
 git_status() {
 
-    hg root >/dev/null 2>/dev/null && echo '☿ ' && return
+	hg root >/dev/null 2>/dev/null && echo '☿ ' && return
 
 	modified_files=$(git diff --raw 2> /dev/null)
 	untracked_files=$(git ls-files --others --exclude-standard 2> /dev/null)
     status=''
 
 	if [ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working tree clean" ] ; then # We have staged files
-       status="▲"
-    fi
+		status="▲"
+	fi
 
-    if [ "$modified_files" ]; then # override staged indicator
-       status="!"
-    fi
+	if [ "$modified_files" ]; then # override staged indicator
+		status="!"
+	fi
 
-    if [ "$untracked_files" ]; then # but deal with untracked files first
-      status="?"
-    fi
+	if [ "$untracked_files" ]; then # but deal with untracked files first
+		status="?"
+	fi
 
-    # are we in a git repo?
-    git branch >/dev/null 2>&1 && echo "±${status} " && return
-    echo '• '
+	# are we in a git repo?
+	git branch >/dev/null 2>&1 && echo "±${status} " && return
+	echo '• '
 }
 
 gitwork() {
@@ -129,14 +132,14 @@ docker_machine="\[$COL3\]\[$COL2\]"'$(__docker_machine_ps1)'"\n: \[$COL4\]"
 PS1=$git_status$user_time$current_dir$dvcs_status$docker_machine
 
 if [ "$(uname)" == "Darwin" ]; then
-    # shellcheck source=.bashrc_darwin
+	# shellcheck source=.bashrc_darwin
 	source ~/.bashrc_darwin
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    # shellcheck source=.bashrc_linux
+	# shellcheck source=.bashrc_linux
 	source ~/.bashrc_linux
 # TODO Cygwin only - update for new Windows subsystem for linux
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-    # shellcheck source=.bashrc_windows
+	# shellcheck source=.bashrc_windows
 	source ~/.bashrc_windows
 fi
 
@@ -145,4 +148,10 @@ source ~/.bashrc_secrets
 export PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+
+# BEGIN ANSIBLE MANAGED BLOCK (DONOT REMOVE THIS)
+source ~/.bashrc_bellrock
+# END ANSIBLE MANAGED BLOCK (DONOT REMOVE THIS)
+# BEGIN DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)
+source ~/.bashrc_devops
+# END DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)

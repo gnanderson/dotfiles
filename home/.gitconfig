@@ -1,6 +1,6 @@
 [user]
 	name = Graham Anderson
-	email = graham.anderson@gmail.com
+	email = graham.anderson@bellrock.tech
 	signingKey = 7FDE630F
 [alias]
 	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
@@ -19,8 +19,6 @@
 	default = simple
 [credential]
 	helper = cache --timeout=14400
-[credential "https://go.herald.scot"]
-	username = graham
 [credential "https://github.com"]
 	username = gnanderson
 [core]

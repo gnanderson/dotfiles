@@ -7,28 +7,29 @@ alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
 alias ls='ls --color=auto'
 alias la='ls -la --color=auto'
 
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-	. "${HOME}/.gpg-agent-info"
-	export GPG_AGENT_INFO
-	export SSH_AUTH_SOCK
-fi
-GPG_TTY=$(tty)
-export GPG_TTY=$(tty)
+#if [ -f "${HOME}/.gpg-agent-info" ]; then
+#	. "${HOME}/.gpg-agent-info"
+#	export GPG_AGENT_INFO
+#	export SSH_AUTH_SOCK
+#fi
+#GPG_TTY=$(tty)
+#export GPG_TTY=$(tty)
 
 
 export KUBECONFIG=$HOME/.kube/config
 export ANSIBLE_TF_BIN=terragrunt
-export CDPATH=.:$HOME/src/skein/skein-infra:$HOME/src/grahamanderson.scot
+#export CDPATH=$CDPATH:$HOME/src/skein/skein-infra:$HOME/src/grahamanderson.scot
 export GOPATH=$HOME
 export GOCACHE=$HOME/.cache/go-build
-export GOPROX=Yhttps://proxy.golang.org
+export GOPROX=https://proxy.golang.org
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/graham/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/path.bash.inc'; fi
+# completion
+if grep -Fxq "ID=ubuntu" /etc/os-release
+then
+	source /etc/profile.d/bash_completion.sh
+fi
 
-# The next line enables shell command completion for gcloud.
 if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
 #gpgconf --create-socketdir
+export LPASS_DISABLE_PINENTRY=1

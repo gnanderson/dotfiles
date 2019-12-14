@@ -10,6 +10,7 @@ set showmode
 set cursorline
 set nobackup
 set noswapfile
+set mouse=a
 
 set cmdheight=1
 set ts=4
