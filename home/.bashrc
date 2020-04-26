@@ -2,7 +2,7 @@
 set -o vi
 
 # editor
-export EDITOR=nvim
+export EDITOR=vim
 
 # Chromium
 export XDG_CACHE_HOME=/tmp

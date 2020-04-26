@@ -1,6 +1,6 @@
 " try to get plug.vim if its not there
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	execute '!curl -fLo --create-dirs ~/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+	execute '!curl --create-dirs -fLo ~/.config/nvim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -25,7 +25,6 @@ Plug 'vim-scripts/progressbar-widget' " used for showing the index progress
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'xolox/vim-session'
 Plug 'tommcdo/vim-exchange'
 " language server / autocomplete plugins
 Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh' }
@@ -52,6 +51,7 @@ let g:SuperTabDefaultCompletionType = '<c-n>'
 
 " sessions
 let g:session_autoload = 'no'
+let g:session_autosave = 'no'
 
 " hashivim
 let g:terraform_fmt_on_save=1

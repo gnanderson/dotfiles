@@ -29,6 +29,6 @@ if [ -f '/home/graham/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-gpgconf --create-socketdir
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+#gpgconf --create-socketdir

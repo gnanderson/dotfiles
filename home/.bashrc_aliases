@@ -10,6 +10,6 @@ alias dci='docker rmi $(docker images | grep "^<none>" | awk '\''{print $7}'\'')
 alias vim='nvim'
 alias prune='git remote prune origin'
 alias gitprune='git branch -r | awk '\''{print $1}'\'' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '\''{print $1}'\'''
-alias cat="bat"
+alias cat="batcat"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias f="fzf --preview 'bat --color \"always\" {}'"
