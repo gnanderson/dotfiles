@@ -93,7 +93,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 let g:ultisnips_php_scalar_types = 1
 
 " neomake
-let neomake_verbose = 3
+let neomake_verbose = 1
 "let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 let g:neomake_open_list = 2
 "let g:neomake_javascript_enabled_makers = ['jscs', 'eslint']
