@@ -38,11 +38,11 @@ splitw -v -p 50 'bash'
 selectp -t 3
 splitw -v -p 50 'bash'
 
-neww -n Vim 'nvim -c "cd ~/"'
+neww -n Vim 'nvim -c "cd ~/LumenWorkspace"'
 setw -t 3 remain-on-exit on
 selectw -t 3
 
-neww -n Vim 'nvim -c "cd ~/"'
+neww -n Vim 'nvim -c "cd ~/LumenWorkspace"'
 setw -t 4 remain-on-exit on
 selectw -t 4
 

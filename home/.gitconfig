@@ -17,6 +17,7 @@
 	ui = auto
 [push]
 	default = simple
+	followTags = false
 [credential]
 	helper = cache --timeout=14400
 [credential "https://github.com"]

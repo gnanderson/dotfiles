@@ -150,8 +150,9 @@ export PATH
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # BEGIN ANSIBLE MANAGED BLOCK (DONOT REMOVE THIS)
-source ~/.bashrc_bellrock
+#source ~/.bashrc_bellrock
 # END ANSIBLE MANAGED BLOCK (DONOT REMOVE THIS)
 # BEGIN DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)
-source ~/.bashrc_devops
+#source ~/.bashrc_devops
 # END DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"

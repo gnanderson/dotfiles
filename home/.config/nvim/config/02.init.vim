@@ -56,12 +56,13 @@ highlight   PmenuSbar     ctermfg=white ctermbg=darkgray
 
 " yeah - wtf
 augroup lang_indents " {
-	autocmd Filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
 	autocmd Filetype json setlocal ts=2 sts=2 sw=2 expandtab
 	autocmd Filetype html setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype twig setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype javascript setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd Filetype scss setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd BufNewFile,BufRead Jenkinsfile setf groovy
 augroup END " }
 
 " cleanup - always
