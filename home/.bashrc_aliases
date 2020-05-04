@@ -13,3 +13,4 @@ alias gitprune='git branch -r | awk '\''{print $1}'\'' | egrep -v -f /dev/fd/0 <
 alias cat="batcat"
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias f="fzf --preview 'bat --color \"always\" {}'"
+alias glances="glances --disable-plugin ip"
