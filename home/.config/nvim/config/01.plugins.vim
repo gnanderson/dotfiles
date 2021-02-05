@@ -84,6 +84,9 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+" vim rooter
+let g:rooter_cd_cmd="lcd"
+
 " UltiSnips
 " Disable built-in <C-x><C-k> to be able to go backward
 inoremap <C-x><C-k> <NOP>

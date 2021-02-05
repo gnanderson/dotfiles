@@ -14,6 +14,15 @@ setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 set -g default-terminal "screen-256color"
 unbind %
 
+# unbind mouse drag for copy/paste
+bind-key    -T copy-mode    MouseDrag1Pane        select-pane \; send-keys -X begin-selection
+bind-key    -T copy-mode    MouseDragEnd1Pane     send-keys -X copy-pipe-and-cancel "xsel -i -b"
+bind-key    -T copy-mode-vi MouseDrag1Pane        select-pane \; send-keys -X begin-selection
+bind-key    -T copy-mode-vi MouseDragEnd1Pane     send-keys -X copy-pipe-and-cancel "xsel -i -b"
+bind-key    -T root         MouseDrag1Pane        if-shell -F -t = "#{mouse_any_flag}" "if -Ft= \"#{pane_in_mode}\" \"copy-mode -M\" \"send-keys -M\"" "copy-mode -M"
+bind-key    -T root         MouseDrag1Border      resize-pane -M
+
+
 set-window-option -g mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
