@@ -18,9 +18,7 @@ alias la='ls -la --color=auto'
 export KUBECONFIG=$HOME/.kube/config
 export ANSIBLE_TF_BIN=terragrunt
 #export CDPATH=$CDPATH:$HOME/src/skein/skein-infra:$HOME/src/grahamanderson.scot
-export GOPATH=$HOME
 export GOCACHE=$HOME/.cache/go-build
-export GOPROX=https://proxy.golang.org
 
 
 # completion
@@ -31,4 +29,5 @@ fi
 
 if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
 #gpgconf --create-socketdir
+export LUMEN_PATH=$HOME/LumenWorkspace
 export LPASS_DISABLE_PINENTRY=1

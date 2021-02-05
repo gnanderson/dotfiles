@@ -3,6 +3,13 @@
 #         without any warranty.
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
+# Remove SSH_AUTH_SOCK to disable tmux automatically resetting the variable
+set -g update-environment "DISPLAY SSH_ASKPASS SSH_AGENT_PID \
+                             SSH_CONNECTION WINDOWID XAUTHORITY"
+
+# Use a symlink to look up SSH authentication
+setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+
 # -- From old tmux config (missing in oh my tmux)
 set -g default-terminal "screen-256color"
 unbind %
@@ -12,6 +19,8 @@ bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
+
+bind -T copy-mode-vi 'y' send -X copy-pipe-and-cancel 'cat | nc -w0 localhost 19988'
 
 # nvim|vim navigation integration
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
@@ -40,7 +49,7 @@ splitw -v -p 50 'bash'
 
 neww -n Vim 'nvim -c "cd ~/LumenWorkspace"'
 setw -t 3 remain-on-exit on
-selectw -t 3
+selectw -t 4
 
 neww -n Vim 'nvim -c "cd ~/LumenWorkspace"'
 setw -t 4 remain-on-exit on

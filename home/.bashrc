@@ -7,7 +7,7 @@ export EDITOR=vim
 # Chromium
 export XDG_CACHE_HOME=/tmp
 
-export CDPATH=.:$HOME:$HOME/LumenWorkspace
+export CDPATH=.:$HOME:$HOME/LumenWorkspace:$HOME/LumenWorkspace/GoWorkspace/src/bitbucket.org/bellrocktechnology
 
 # Go
 PATH=~/bin:/usr/local/go/bin:~/.local/bin:$PATH
@@ -40,8 +40,36 @@ fif() {
 	--hidden \
 	--follow \
 	--glob '!.git/*' "$1" \
-	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " start ":" end}' \
-	| fzf --preview 'bat --wrap character --color always {1} --line-range {2}' --preview-window wrap
+	| awk -F  ':' '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " start ":" end}' \
+	| fzf +i --preview 'bat --wrap character --color always {1} --highlight-line {1} --line-range {2}' --preview-window wrap
+}
+fif3() {
+	rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; printf("%d\t%d:%d  %s\n", $2, start, end, $1)}' \
+	| fzf --phony --preview 'bat --style full --wrap character --color always {3..} --highlight-line {1} --line-range {2}' --preview-window wrap
+}
+fif2() {
+	rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
+	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window wrap
 }
 
 alias tgp='terragrunt plan'
@@ -156,3 +184,14 @@ export PATH
 #source ~/.bashrc_devops
 # END DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export GOPROXY=https://goproxy.bellrock.dev
+export GONOSUMDB="bitbucket.org/bellrocktechnology/*"
+
+source ~/.bashrc_devops
+source ~/.bashrc_bellrock
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/graham/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/graham/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
