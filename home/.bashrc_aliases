@@ -15,3 +15,4 @@ alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias f="fzf --preview 'bat --color \"always\" {}'"
 alias glances="glances --disable-plugin ip"
 alias dockstopall='sudo docker stop $(sudo docker ps -aq)'
+alias gitclean='git branch --merged | egrep -v "(^\*|master|main|dev|alpha|beta|rc)" | xargs git branch -d'

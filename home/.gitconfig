@@ -24,5 +24,6 @@
 	username = gnanderson
 [core]
 	editor = nvim
+	autocrlf = input
 [merge]
 	ff = only
