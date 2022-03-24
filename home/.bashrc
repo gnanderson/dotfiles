@@ -1,17 +1,18 @@
 # command mode
 set -o vi
 
+export SSH_AUTH_TYPE=ssh-agent
+#export SSH_AUTH_TYPE=gpg-agent
+
 # editor
 export EDITOR=vim
 
 # Chromium
 export XDG_CACHE_HOME=/tmp
 
-export CDPATH=.:$HOME:$HOME/LumenWorkspace:$HOME/LumenWorkspace/GoWorkspace/src/bitbucket.org/bellrocktechnology
-
 # Go
 PATH=~/bin:/usr/local/go/bin:~/.local/bin:$PATH
-#export GOPATH=$HOME
+export GOMODCACHE=$HOME/.cache/go-build
 
 # Aliases
 test -s ~/.bashrc_aliases && . ~/.bashrc_aliases || true
@@ -24,8 +25,10 @@ HISTIGNORE=ssh:pwd:yubifix:history
 shopt -s histappend
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
 # shellcheck source=.func/docker.sh
 source "$HOME/.func/docker.sh"
+
 # shellcheck source=.homesick/repos/homeshick/homeshick.sh
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
@@ -41,8 +44,9 @@ fif() {
 	--follow \
 	--glob '!.git/*' "$1" \
 	| awk -F  ':' '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " start ":" end}' \
-	| fzf +i --preview 'bat --wrap character --color always {1} --highlight-line {1} --line-range {2}' --preview-window wrap
+	| fzf +i --preview 'batcat --wrap character --color always {1} --highlight-line {1} --line-range {2}' --preview-window wrap
 }
+
 fif3() {
 	rg  \
 	--column \
@@ -55,8 +59,9 @@ fif3() {
 	--follow \
 	--glob '!.git/*' "$1" \
 	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; printf("%d\t%d:%d  %s\n", $2, start, end, $1)}' \
-	| fzf --phony --preview 'bat --style full --wrap character --color always {3..} --highlight-line {1} --line-range {2}' --preview-window wrap
+	| fzf --phony --preview 'batcat --style full --wrap character --color always {3..} --highlight-line {1} --line-range {2}' --preview-window wrap
 }
+
 fif2() {
 	rg  \
 	--column \
@@ -69,13 +74,8 @@ fif2() {
 	--follow \
 	--glob '!.git/*' "$1" \
 	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
-	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window wrap
+	| fzf --preview 'batcat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window wrap
 }
-
-alias tgp='terragrunt plan'
-alias tga='terragrunt apply'
-alias tgd='terragrunt destroy'
-alias s3='s3cmd'
 
 # Tidy PWD
 bash_prompt_command() {
@@ -94,9 +94,6 @@ bash_prompt_command() {
 
 # Git staging/index indicator
 git_status() {
-
-	hg root >/dev/null 2>/dev/null && echo '☿ ' && return
-
 	modified_files=$(git diff --raw 2> /dev/null)
 	untracked_files=$(git ls-files --others --exclude-standard 2> /dev/null)
     status=''
@@ -177,23 +174,11 @@ export PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# BEGIN ANSIBLE MANAGED BLOCK (DONOT REMOVE THIS)
-#source ~/.bashrc_bellrock
-# END ANSIBLE MANAGED BLOCK (DONOT REMOVE THIS)
-# BEGIN DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)
-#source ~/.bashrc_devops
-# END DEVOPS MANAGED BLOCK (DO NOT REMOVE THIS)
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 source ~/.bashrc_devops
+kubecfg
+
 source ~/.bashrc_bellrock
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/graham/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/home/graham/Downloads/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+complete -C /home/graham/bin/gocomplete go

@@ -1,0 +1,12 @@
+[Unit]
+Description=Copy backend service piping input to xclip
+Requires=xclip.socket
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/xclip -verbose -t UTF8_STRING -i -sel clipboard
+#ExecStart=/usr/bin/xsel -n -i -b -vvvv
+#ExecStart=/home/graham/tmp/clip
+#ExecStart=/usr/bin/xsel -i -b
+StandardInput=socket
+StandardOutput=socket

@@ -41,9 +41,9 @@ bind -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
 bind -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
 bind -n 'C-\' if-shell "$is_vim" "send-keys 'C-\\'" "select-pane -l"
 
-new  -s excession -x 271 -y 83 -n r00t 'glances --disable-plugin ip --enable-plugin sensors'
+new  -s excession -x 271 -y 83 -n r00t #'glances --disable-plugin ip --enable-plugin sensors'
 setw -t 1 remain-on-exit on
-splitw -h -p 50 -t 1 'sudo su -'
+splitw -h -p 50 -t 1 #'sudo su -'
 
 neww -n Graham 'bash'
 setw -t 2 remain-on-exit on

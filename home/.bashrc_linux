@@ -1,37 +1,14 @@
-alias oscb='osc build openSUSE_13.1'
-alias oscba='osc build --no-verify openSUSE_13.1'
-alias osca='osc -A https://obs.dev.andtech.eu:444'
-alias bios='[ -f /usr/sbin/dmidecode ] && sudo -v && echo -n "Motherboard" && sudo /usr/sbin/dmidecode -t 1 | grep "Manufacturer\|Product Name\|Serial Number" | tr -d "\t" | sed "s/Manufacturer//" && echo -ne "\nBIOS" && sudo /usr/sbin/dmidecode -t 0 | grep "Vendor\|Version\|Release" | tr -d "\t" | sed "s/Vendor//"'
-alias fixboot="su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'"
-
-alias ls='ls --color=auto'
-alias la='ls -la --color=auto'
-
-#if [ -f "${HOME}/.gpg-agent-info" ]; then
-#	. "${HOME}/.gpg-agent-info"
-#	export GPG_AGENT_INFO
-#	export SSH_AUTH_SOCK
-#fi
-#export GPG_TTY=$(tty)
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-
-
-export KUBECONFIG=$HOME/.kube/config
-export ANSIBLE_TF_BIN=terragrunt
-#export CDPATH=$CDPATH:$HOME/src/skein/skein-infra:$HOME/src/grahamanderson.scot
-export GOCACHE=$HOME/.cache/go-build
-export GOMODCACHE=$HOME/.cache/go-mod
-
+if [ "$SSH_AUTH_TYPE" == "gpg-agent" ]; then
+	export GPG_TTY="$(tty)"
+	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+	gpgconf --launch gpg-agent
+elif [ "$SSH_AUTH_TYPE" == "ssh-agent" ]; then
+	systemctl --user start ssh-agent.service
+	export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
 
 # completion
 if grep -Fxq "ID=ubuntu" /etc/os-release
 then
 	source /etc/profile.d/bash_completion.sh
 fi
-
-if [ -f '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/graham/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-#gpgconf --create-socketdir
-export LUMEN_PATH=$HOME/LumenWorkspace
-export LPASS_DISABLE_PINENTRY=1
